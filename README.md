@@ -4,7 +4,7 @@ Welcome to the guided Discord.js bot template! This template has detailed instru
 
 Use this to understand the structure of Discord bots and to build a bot of your own. (Adapted from the official [discord.js guide](https://discordjs.guide/))
 
-[Click here for a quick-and-simple template](https://replit.com/@FaustineW1/Discordjs-Bot-Simple-Template-slash-commands).
+**[Click here for a quick-and-simple template](https://replit.com/@FaustineW1/Discordjs-Bot-Simple-Template-slash-commands).**
 
 ## Setup
 
@@ -71,7 +71,7 @@ The `events` folder contains an event example.
 
 ## Customization
 
-Although perhaps not officially "correct," it helps me to think about Discord bots as `clients` (like fancy applications) that respond to `commands` and `events`.
+Although perhaps not officially "correct," it helps me to think about Discord bots as `clients` (or "applications") that respond to `commands` and `events`.
 
 To customize the bot to your liking, you customize what `commands` the bot has and what `events` it responds to. *(commands are technically a type of "interaction" that triggers "interactionCreate" events)*
 
@@ -100,7 +100,7 @@ Under the `commands` folder, start with `ping.js` and `server.js` for detailed c
   * [Learn Discord.js in 15 minutes](https://www.youtube.com/watch?v=H98fj3gnYbw)
 * [Discord.js documentation](https://discord.js.org/#/docs/discord.js/main/general/welcome)
 
-Documentation may be scary at first, so some helpful YouTube videos would be great for getting started!
+Documentation, although incredibly helpful, may be scary at first, so some helpful YouTube videos would be great for getting started!
 
 ### Good luck!
 
