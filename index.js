@@ -6,6 +6,18 @@ const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
 // Access your bot info from Secrets (environment variables)
 const token = process.env['TOKEN'];
+
+const express = require('express');
+const port = 3000;
+const app = express();
+
+// [Hosting!]
+app.get('/', (request, response) => {
+	return response.send("Hello world! ඞ");
+});
+app.listen(port, () => {
+	console.log("[EXPRESS] ".magenta + "Express is ready.".brightGreen)
+});
 // Server function (uncomment if using the bot-server.js file)
 // const keepAlive = require('./bot-server'); 
 
