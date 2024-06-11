@@ -108,4 +108,4 @@ This was made as a submission to the Repl.it Template Jam. Compiling it has help
 
 I'm not a professional programmer, so please keep improving on what I have. Looking forward to see what you create! :D
 
--- Faustine W.
+-- Faustine W.# CommissionsRewards
