@@ -63,23 +63,49 @@ for (const file of commandFiles) {
 
 // [EXECUTE COMMANDS DYNAMICALLY]
 
+
+
+
+
 // 'interactionCreate' even listener
 client.on('interactionCreate', async interaction => {
-	// Not all interactions are commands, only respond if it's a command
-  if (!interaction.isCommand()) return;
+		if (interaction.isCommand()) {
+				const command = client.commands.get(interaction.commandName);
+				if (!command) return;
 
-  // Get command module from client commands collection
-	const command = client.commands.get(interaction.commandName);
-
-	if (!command) return;
-
-	try {
-		await command.execute(interaction); // execute command's function
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true }); // ephemeral flag - only the user who executed the command can see it
-	}
+				try {
+						await command.execute(interaction);
+				} catch (error) {
+						console.error(error);
+						await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+				}
+		} else if (interaction.isButton()) {
+				const command = client.commands.get('configure-message');
+				if (command) {
+						try {
+								await command.handleButtonInteraction(interaction);
+						} catch (error) {
+								console.error(error);
+								await interaction.reply({ content: 'There was an error while handling the button interaction!', ephemeral: true });
+						}
+				}
+		} else if (interaction.isModalSubmit()) {
+				const command = client.commands.get('configure-message');
+				if (command) {
+						try {
+								await command.handleModal(interaction);
+						} catch (error) {
+								console.error(error);
+								await interaction.reply({ content: 'There was an error while handling the modal interaction!', ephemeral: true });
+						}
+				}
+		}
 });
+
+
+
+
+
 
 // [FINAL STEPS]
 // Keeps discord bot online (uncomment if using the bot-server.js file)

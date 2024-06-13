@@ -1,4 +1,4 @@
-// Example of slash command options + accessing users' avatar URL
+ // Example of slash command options + accessing users' avatar URL
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
