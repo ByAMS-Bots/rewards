@@ -26,6 +26,7 @@ const serverSchema = new mongoose.Schema({
     modID: { type: Number, default: 0 },
     approve: { type: String, default: 'Your IN request has been approved' },
     deny: { type: String, default: 'Your IN request has been denied' },
+    sessionsRole: { type: String },
 });
 
 // Create and export the Server model based on the schema

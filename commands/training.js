@@ -10,12 +10,12 @@ module.exports = {
         try {
             const serverId = interaction.guild.id;
             const client = interaction.client;
-
+            
             // Find server settings document
             const serverSettings = await Server.findOne({ serverId });
 
-            if (!serverSettings || serverSettings.sessionsID === "null") {
-                await interaction.reply('Sessions channel is not set up. View our setup guide for assistance.');
+            if (!serverSettings || !serverSettings.sessionsID || !serverSettings.sessionsRole) {
+                await interaction.reply('Sessions channel or role is not set up. View our setup guide for assistance.');
                 return;
             }
 
@@ -32,6 +32,7 @@ module.exports = {
             // Get the channel and send the embed
             const channel = client.channels.cache.get(serverSettings.sessionsID);
             if (channel) {
+                await channel.send(`<@&${serverSettings.sessionsRole}>`);
                 await channel.send({ embeds: [embed] });
                 await interaction.reply('Sent!');
             } else {
