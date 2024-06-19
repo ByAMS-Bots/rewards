@@ -9,13 +9,23 @@ const serverSchema = new mongoose.Schema({
     cancelMessage: { type: String, default: 'Not set up, please use the /help -> config to set up.' },
     shiftMessage: { type: String, default: 'Not set up, please use the /help -> config to set up.' },
     shiftEndMessage: { type: String, default: 'Not set up, please use the /help -> config to set up.' },
+    shiftTitle: { type: String, default: 'Shift' },
+    shiftColor: { type: String, default: '#e0f0e3' },
+    trainingStartColor: { type: String, default: '#e0f0e3' },
+    trainingLockedColor: { type: String, default: '#FDFD96' },
+    trainingConcludedColor: { type: String, default: '#FF6961' },
+    trainingText: { type: String, default: 'Training' },
+    Branding: { type: String, default: 'I\'m ⚡ by CommissionsByAMS' },
+    defaultColor:{type: String, default: "#071a1a"},
     premium: { type: String, default: 'false' },
     tester: { type: String, default: 'false' },
-    inID: { type: Number, default: 0 }, 
-    sessionsID: { type: String, required: true, unique: true },
+    inID: { type: String, default: 0 }, 
+    sessionsID: { type: String, required: true, unique: true, default: "null" },
     suggestionsID: { type: Number, default: 0 },
     commandLogID: { type: Number, default: 0 },
-    modID: { type: Number, default: 0 }
+    modID: { type: Number, default: 0 },
+    approve: { type: String, default: 'Your IN request has been approved' },
+    deny: { type: String, default: 'Your IN request has been denied' },
 });
 
 // Create and export the Server model based on the schema

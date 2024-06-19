@@ -63,9 +63,27 @@ for (const file of commandFiles) {
 
 // [EXECUTE COMMANDS DYNAMICALLY]
 
+const { Events } = require('discord.js');
+const userstats = require('./models/user.js'); // Ensure the correct path to your user model
 
-
-
+client.on('interactionCreate', async interaction => {
+	try {
+		const blockeduser = await userstats.exists({ id: interaction.user.id }); // Correct the query structure
+			if (blockeduser === "yes") { // Compare with the string "yes"
+			await interaction.reply("You have requested a data removal causing in a server ban within all servers if you run a command. Please remember you can remove the bot block by opening a ticket in our server, although you would need to contact the server to unban you.");
+			setTimeout(async () => {
+				try {
+					await interaction.guild.members.ban(interaction.user.id);
+				} catch (banError) {
+					console.error('Error banning user:', banError);
+					interaction.reply("Error banning you. Data can still be added and collected in this server or any server you share with the bot. We suggest you leave this server to stop data from being collected from this server..")
+				}
+			}, 5000);
+		}
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 // 'interactionCreate' even listener
 client.on('interactionCreate', async interaction => {
