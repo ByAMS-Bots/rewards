@@ -38,20 +38,7 @@ module.exports = {
 
             const serverSettings = await Server.findOne({ serverId });
             if (!serverSettings) {
-                try{
                 await interaction.reply('Server settings not found. Please set them up using /setup.');
-                return;
-                }catch (error){
-                    try{
-                        intrraction.reply("If you've run the set up command and still see this please contact support.")
-                    }catch{
-                        intrraction.followUp("If you've run the set up command and still see this please contact support.")
-                    }
-                    }
-                }
-
-            if (!serverSettings) {
-                await interaction.reply('Server settings not found.');
                 return;
             }
 
@@ -62,11 +49,10 @@ module.exports = {
                 return;
             }
 
-            // Fetch the channel using client
             const app_log = client.channels.cache.get(insender);
 
             if (!app_log) {
-                await interaction.reply('The Inactivity Requests channel does not exist');
+                await interaction.reply('The Inactivity Requests channel does not exist.');
                 return;
             }
 
@@ -74,12 +60,12 @@ module.exports = {
                 .setColor(serverSettings.defaultColor)
                 .setTitle(`${requestee.username}'s Inactivity Request`)
                 .setFooter({ text: serverSettings.Branding })
-                .addFields(
+                .addFields([
                     { name: 'Roblox Username', value: rblx },
                     { name: 'Date of Leave', value: dateOfLeave },
                     { name: 'Date of Return', value: dateOfReturn },
                     { name: 'Notes', value: notes },
-                );
+                ]);
 
             const row = new MessageActionRow()
                 .addComponents(
@@ -97,40 +83,34 @@ module.exports = {
 
             const filter = i => i.customId === 'approved' || i.customId === 'denied';
             const collector = message.createMessageComponentCollector({ filter, max: 1 });
-try{
+
             collector.on('collect', async i => {
-                let responseMessage;
-                if (i.customId === 'approved') {
-                    const approved = new MessageEmbed()
-                    .setColor(serverSettings.defaultColor)
-                    .setTitle(`Inactivity Request Update`)
-                        .setDescription(`Your inacitivty request has been accepted by ${i.user.username} onbehalf of ${i.guild.name}`)
-                    .setFooter({ text: serverSettings.Branding })
-                    .addFields(
-                        { name: 'Guild ID', value: serverId}
-                        )
+                try {
+                    if (i.customId === 'approved') {
+                        const approved = new MessageEmbed()
+                            .setColor(serverSettings.defaultColor)
+                            .setTitle('Inactivity Request Update')
+                            .setDescription(`Your inactivity request has been accepted by ${i.user.username} on behalf of ${i.guild.name}`)
+                            .setFooter({ text: serverSettings.Branding })
+                            .addFields([{ name: 'Guild ID', value: serverId }]);
 
-                     await requestee.send({ embeds: [approved]});
-                    
-                } else {
-                    const denied = new MessageEmbed()
-                    .setColor(serverSettings.defaultColor)
-                    .setTitle(`Inactivity Request Update`)
-                        .setDescription(`Your inacitivty request has been denied by ${i.user.username} onbehalf of ${i.guild.name}`)
-                    .setFooter({ text: serverSettings.Branding })
-                    .addFields(
-                        { name: 'Guild ID', value: serverId}
-                        )
-                      await requestee.send({ embeds: [denied]});
+                        await requestee.send({ embeds: [approved] });
+                    } else {
+                        const denied = new MessageEmbed()
+                            .setColor(serverSettings.defaultColor)
+                            .setTitle('Inactivity Request Update')
+                            .setDescription(`Your inactivity request has been denied by ${i.user.username} on behalf of ${i.guild.name}`)
+                            .setFooter({ text: serverSettings.Branding })
+                            .addFields([{ name: 'Guild ID', value: serverId }]);
 
+                        await requestee.send({ embeds: [denied] });
+                    }
+                } catch (error) {
+                    await i.update({ content: `I'm unable to DM ${requestee.username}. This request has been ${i.customId} by ${i.user.username}.`, components: [] });
+                    return;
                 }
-            }catch{
-    i.update(`I'm unable to DM ${requestee.username} | This request has been ${i.customId} by ${i.user.username}.`)
-            }
+
                 await i.update({ content: `This request has been ${i.customId} by ${i.user.username}.`, components: [] });
-
-             
-
             });
 
             await interaction.reply('Your inactivity request has been sent!');
