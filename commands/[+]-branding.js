@@ -1,12 +1,18 @@
 // Example of slash command options and reading option input
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Server = require("../models/server-settings")
+const { Permissions } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('p-branding')
     .setDescription('Update the bots branding on the embed footers')
-    .addStringOption(option => option.setName('text').setDescription('Want you want the bot to say')).required(true), // user option defined
+    .addStringOption(option => option.setName('text').setDescription('Want you want the bot to say')  .setRequired(true)), // user option defined
   async execute(interaction) {
+    if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+      await interaction.reply('You are unable to run this command because you don\'t have the required permission: Manage Messages.');
+      return;
+    }
+
     const serverId = interaction.guild.id
     const serverSettings = await Server.findOne({ serverId });
      const text = interaction.options.getString('text')?? 'No input provided';;

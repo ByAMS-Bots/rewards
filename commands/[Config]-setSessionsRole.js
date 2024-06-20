@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Server = require('../models/server-settings'); // Adjust path as needed
-
+const { Permissions } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('config-setsessionsrole')
@@ -11,6 +11,11 @@ module.exports = {
                 .setDescription('The role pinged for sessions')
                 .setRequired(true)),
     async execute(interaction) {
+        if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+            await interaction.reply('You are unable to run this command because you don\'t have the required permission: Manage Messages.');
+            return;
+        }
+
         try {
             const serverId = interaction.guild.id;
             const trainingStartMessage = interaction.options.getRole('role');

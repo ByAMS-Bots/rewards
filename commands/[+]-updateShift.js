@@ -1,8 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, PermissionFlagBits } = require('discord.js');
 const Server = require('../models/server-settings');
-
+const { Permissions } = require('discord.js');
 module.exports = {
+	
 		data: new SlashCommandBuilder()
 				.setName('p-shift')
 				.setDescription('Edit the premium shift details.')
@@ -11,6 +12,11 @@ module.exports = {
 ,
 
 		async execute(interaction) {
+			if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+				await interaction.reply('You are unable to run this command because you don\'t have the required permission: Manage Messages.');
+				return;
+			}
+
 			const { Permissions } = require('discord.js');
 			if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
 				await interaction.reply('You are unable to run this command because you don\'t have the required permission: Manage Messages.');

@@ -1,6 +1,7 @@
 // Example of slash command options and reading option input
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Server = require("../models/server-settings")
+const { Permissions } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('p-say')
