@@ -21,12 +21,14 @@ const serverSchema = new mongoose.Schema({
     tester: { type: String, default: 'false' },
     inID: { type: String, default: 0 }, 
     sessionsID: { type: String, required: true, unique: true, default: "null" },
+    shiftID: { type: String, required: true, unique: true, default: "null" },
     suggestionsID: { type: Number, default: 0 },
     commandLogID: { type: Number, default: 0 },
     modID: { type: Number, default: 0 },
     approve: { type: String, default: 'Your IN request has been approved' },
     deny: { type: String, default: 'Your IN request has been denied' },
     sessionsRole: { type: String },
+    shiftRole: { type: String },
 });
 
 // Create and export the Server model based on the schema

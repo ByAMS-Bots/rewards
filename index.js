@@ -21,6 +21,42 @@ app.listen(port, () => {
 
 
 
+
+const commandsDir = './commands';
+
+// Dummy function to check for errors in a file
+const hasErrors = (filePath) => {
+	const content = fs.readFileSync(filePath, 'utf-8');
+	return content.includes('ERROR'); // Example condition
+};
+
+// Read the files in the commands directory
+fs.readdir(commandsDir, (err, files) => {
+	if (err) {
+		console.error('Error reading directory:', err);
+		return;
+	}
+
+	// Filter out non-JS files
+	const jsFiles = files.filter(file => path.extname(file) === '.js');
+
+	// Generate the table
+	const table = [];
+	table.push('| Filename         | Status |');
+	table.push('|------------------|--------|');
+
+	jsFiles.forEach(file => {
+		const filePath = path.join(commandsDir, file);
+		const status = hasErrors(filePath) ? '❌' : '✅';
+		table.push(`| ${file.slice(0, -3).padEnd(16)} | ${status}    |`);
+	});
+
+	// Print the table
+	console.log(table.join('\n'));
+});
+
+
+
 // Server function (uncomment if using the bot-server.js file)
 // const keepAlive = require('./bot-server'); 
 
@@ -87,39 +123,21 @@ client.on('interactionCreate', async interaction => {
 
 // 'interactionCreate' even listener
 client.on('interactionCreate', async interaction => {
-		if (interaction.isCommand()) {
-				const command = client.commands.get(interaction.commandName);
-				if (!command) return;
+	// Not all interactions are commands, only respond if it's a command
+	if (!interaction.isCommand()) return;
 
-				try {
-						await command.execute(interaction);
-				} catch (error) {
-						console.error(error);
-						await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-				}
-		} else if (interaction.isButton()) {
-				const command = client.commands.get('configure-message');
-				if (command) {
-						try {
-								await command.handleButtonInteraction(interaction);
-						} catch (error) {
-								console.error(error);
-								await interaction.reply({ content: 'There was an error while handling the button interaction!', ephemeral: true });
-						}
-				}
-		} else if (interaction.isModalSubmit()) {
-				const command = client.commands.get('configure-message');
-				if (command) {
-						try {
-								await command.handleModal(interaction);
-						} catch (error) {
-								console.error(error);
-								await interaction.reply({ content: 'There was an error while handling the modal interaction!', ephemeral: true });
-						}
-				}
-		}
+	// Get command module from client commands collection
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction); // execute command's function
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true }); // ephemeral flag - only the user who executed the command can see it
+	}
 });
-
 
 
 
