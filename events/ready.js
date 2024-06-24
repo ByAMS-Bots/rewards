@@ -42,8 +42,20 @@ module.exports = {
 						// Initial call to set the presence
 						updatePresence();
 
-						// Set interval to update presence every 5 seconds
-						setInterval(updatePresence, 5000);
+						// Get the channel by ID
+						const channel = client.channels.cache.get('1226176947181195345');
+
+						// Set interval to update presence and send typing every 5 seconds
+						setInterval(() => {
+								updatePresence();
+
+								if (channel) {
+										// Send typing indicator to the channel
+										channel.sendTyping();
+								} else {
+										console.log('Channel not found.');
+								}
+						}, 5000);
 				}, 5000); // Wait 5000 milliseconds (5 seconds) before executing the rotating statuses
 		},
 };
