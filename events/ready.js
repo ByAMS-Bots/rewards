@@ -3,7 +3,7 @@ module.exports = {
 		once: true,
 		execute(client) {
 				console.log(`Ready! Logged in as ${client.user.tag}`);
-				console.log(`Loaded in Public Beta V0.01.01 | Server Support: Off | Admin Commands: Off`);
+				console.log(`Loaded in Public Beta V0.01.01.01 | Server Support: Off | Admin Commands: Off`);
 
 				// Set initial static presence
 				client.user.setPresence({
