@@ -17,10 +17,10 @@ module.exports = {
 				setTimeout(() => {
 						// Array of statuses to rotate through
 						const statuses = [
-								{ activity: 'Cafell RBLX', type: 'PLAYING' },
-								{ activity: 'my console for any errors', type: 'WATCHING' },
+								{ activity: 'how to scam 101 by Sophia', type: 'WATCHING' },
+								{ activity: 'Steve Sleep', type: 'WATCHING' },
 								{ activity: `Steve's excuse of a playlist`, type: 'LISTENING' },
-								{ activity: 'summit beta', type: 'PLAYING' }
+								{ activity: 'with databse values', type: 'PLAYING' }
 								// Add more statuses as needed
 						];
 

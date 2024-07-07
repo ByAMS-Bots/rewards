@@ -9,7 +9,7 @@ module.exports = {
 		.setName('ping') // the user would type '/ping' into the server
 		.setDescription('Replies with Pong!'), // this description shows up in the list of slash commands
 	async execute(interaction) { // contains the functionality of the commands
-		await interaction.reply('Pong!'); // bot replies
+		await interaction.reply(`I smacked that ball across the table in **${interaction.client.ws.ping}ms**`); // bot replies
 	},
 };
 

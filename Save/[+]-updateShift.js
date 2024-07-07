@@ -1,14 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, PermissionFlagBits } = require('discord.js');
-const Server = require('../models/server-settings');
+const Server = require('../models/user.js');
 const { Permissions } = require('discord.js');
 module.exports = {
 	
 		data: new SlashCommandBuilder()
-				.setName('p-shift')
-				.setDescription('Edit the premium shift details.')
-				.addStringOption(option => option.setName('shift-title').setDescription('The title shown at the top of shift embeds.'))
-				.addStringOption(option => option.setName('shift-start-color').setDescription('The color used when a shift starts in hex format Ex. #000000.'))
+				.setName('add')
+				.setDescription('Add server-level points')
+				.addUserOption(option => option.setName('user').setDescription('The user the points are being added to'))
+				.addIntegerOption(option => option.setName('amount').setDescription('Amount of points added'))
 ,
 
 		async execute(interaction) {

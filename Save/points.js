@@ -30,7 +30,7 @@ module.exports = {
 
         // Use findOneAndUpdate with upsert: true to ensure atomicity
         let user = await User.findOneAndUpdate(
-            { userId, serverID },
+            { userId},
             {
                 $setOnInsert: {
                     userId,

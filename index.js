@@ -13,7 +13,7 @@ const app = express();
 
 // [Hosting!]
 app.get('/', (request, response) => {
-	return response.send("Hello world! ඞ");
+	return response.send("Rewards is online!");
 });
 app.listen(port, () => {
 	console.log("[EXPRESS] ".magenta + "Express is ready.".brightGreen)

@@ -5,10 +5,9 @@ const userSchema = new mongoose.Schema({
     serverID: { type: String, required: true },
     username: { type: String, required: true },
     points: { type: Number, default: 0 },
-    lastActive: { type: Date, default: Date.now }
+    tier: { type: String, required: true, default: 'Sapphire' },
 });
 
-// Composite unique index on userId and serverID
-userSchema.index({ userId: 1, serverID: 1 }, { unique: true });
+const User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = User;
