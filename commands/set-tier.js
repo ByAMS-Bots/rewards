@@ -56,7 +56,7 @@ module.exports = {
                 .setTitle(`Set Tier for ${targetUser.username}`)
                 .setDescription(`Current points: ${userDoc.points}`)
                 .addField(
-                    {name: 'Suggested Tier', value: userCurrentTier ? userCurrentTier.label : 'None', true})
+                    {name: 'Suggested Tier', value: userCurrentTier ? userCurrentTier.label : 'None'})
                 .setFooter({text: 'MyPoints | The future of Ro-Rewards'});
 
             await interaction.reply({ embeds: [embed], components: [row] });
