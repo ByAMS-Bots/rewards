@@ -55,9 +55,10 @@ module.exports = {
                 .setColor('#071a1a')
                 .setTitle(`Set Tier for ${targetUser.username}`)
                 .setDescription(`Current points: ${userDoc.points}`)
-                .addField(
-                    {name: 'Suggested Tier', value: userCurrentTier ? userCurrentTier.label : 'None'})
-                .setFooter({text: 'MyPoints | The future of Ro-Rewards'});
+                .addFields(
+                    { name: 'Suggested Tier', value: userCurrentTier ? userCurrentTier.label : 'None' }
+                )
+                .setFooter({ text: 'MyPoints | The future of Ro-Rewards' });
 
             await interaction.reply({ embeds: [embed], components: [row] });
 
@@ -79,7 +80,7 @@ module.exports = {
                         { name: 'Reason', value: reason, inline: true },
                         { name: 'Within Points Range', value: isWithinRange ? 'Yes' : 'No', inline: true }
                     )
-                    .setFooter({text: 'MyPoints | The future of Ro-Rewards'});
+                    .setFooter({ text: 'MyPoints | The future of Ro-Rewards' });
 
                 const rowApproval = new MessageActionRow()
                     .addComponents(
@@ -112,7 +113,7 @@ module.exports = {
                                 { name: 'Points', value: userDoc.points.toString(), inline: true },
                                 { name: 'Tier', value: userDoc.tier, inline: true }
                             )
-                            .setFooter({text:'MyPoints | The future of Ro-Rewards'});
+                            .setFooter({ text: 'MyPoints | The future of Ro-Rewards' });
 
                         if (app_log) {
                             await app_log.send({ embeds: [logEmbed] });
@@ -126,7 +127,7 @@ module.exports = {
                                 { name: 'Current Points', value: userDoc.points.toString(), inline: true },
                                 { name: 'New Tier', value: userDoc.tier, inline: true }
                             )
-                            .setFooter({text:'MyPoints | The future of Ro-Rewards'});
+                            .setFooter({ text: 'MyPoints | The future of Ro-Rewards' });
 
                         await targetUser.send({ embeds: [dmEmbed] });
                         await interaction.user.send({ embeds: [dmEmbed] });
