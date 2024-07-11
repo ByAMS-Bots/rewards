@@ -30,10 +30,10 @@ module.exports = {
             }
 
             const tierOptions = [
-                { label: 'Sapphire', value: 'sapphire', minPoints: 0, maxPoints: 300 },
-                { label: 'Emerald', value: 'emerald', minPoints: 301, maxPoints: 600 },
-                { label: 'Diamond', value: 'diamond', minPoints: 601, maxPoints: 999 },
-                { label: 'Cosmic Reserve', value: 'cosmic-reserve', minPoints: 2500, maxPoints: Infinity },
+                { label: 'Sapphire', value: 'sapphire', minPoints: 0, maxPoints: 700 },
+                { label: 'Emerald', value: 'emerald', minPoints: 701, maxPoints: 1000 },
+                { label: 'Diamond', value: 'diamond', minPoints: 1001, maxPoints: 1700 },
+                { label: 'Cosmic Reserve', value: 'cosmic-reserve', minPoints: 1700, maxPoints: 2499 },
                 { label: 'Opal', value: 'opal', minPoints: 2500, maxPoints: Infinity },
             ];
 
