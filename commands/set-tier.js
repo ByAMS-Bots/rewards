@@ -78,7 +78,7 @@ module.exports = {
                         { name: 'Reason', value: reason, inline: true },
                         { name: 'Within Points Range', value: isWithinRange ? 'Yes' : 'No', inline: true }
                     )
-                    .setFooter('MyPoints | The future of Ro-Rewards');
+                    .setFooter({text: 'MyPoints | The future of Ro-Rewards'});
 
                 const rowApproval = new MessageActionRow()
                     .addComponents(
@@ -111,7 +111,7 @@ module.exports = {
                                 { name: 'Points', value: userDoc.points.toString(), inline: true },
                                 { name: 'Tier', value: userDoc.tier, inline: true }
                             )
-                            .setFooter('MyPoints | The future of Ro-Rewards');
+                            .setFooter({text:'MyPoints | The future of Ro-Rewards'});
 
                         if (app_log) {
                             await app_log.send({ embeds: [logEmbed] });
